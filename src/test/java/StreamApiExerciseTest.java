@@ -207,12 +207,26 @@ class StreamApiExerciseTest {
     void forEachOrdered() {
         String sentence = "Jak nauczyc się programowania?";
         sentence.chars().forEach(c -> System.out.print((char) c));
+        System.out.println();
 
         //wielowątkowo
         sentence.chars().parallel().forEach(c -> System.out.print((char) c));
+        System.out.println();
 
         //wielowątkowo z zachowaniem kolejności
         sentence.chars().parallel().forEachOrdered(c -> System.out.print((char) c));
     }
 
+    //peek - metoda stworzona do debugowania, pozwala podejrzeć aktualne przetwarzane elementy
+    //modyfikuje kolekcje, więc powinno się używać jej tylko do debug
+    @Test
+    void peakOperations() {
+        List<Employee> newEmployees = employees.stream()
+                .peek(employee -> employee.setAge(0))
+                .collect(Collectors.toList());
+
+        System.out.println(newEmployees);
+        System.out.println();
+        System.out.println(employees);
+    }
 }

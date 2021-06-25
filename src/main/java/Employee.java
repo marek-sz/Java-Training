@@ -44,4 +44,14 @@ public class Employee {
     public void setSkills(List<String> skills) {
         this.skills = skills;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", skills=" + skills +
+                '}';
+    }
 }

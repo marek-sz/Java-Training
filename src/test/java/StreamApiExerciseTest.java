@@ -180,4 +180,17 @@ class StreamApiExerciseTest {
         System.out.println(firstCharactersJoined);
     }
 
+    //metoda takeWhile procesuje streama dopóki spełniony jest jakiś predykat
+    //działa podobnie do filter, lecz filter nakłada predykat na wszystkie elementy streama,
+    //natomiast takeWhile nie procesuje kolejnych elementów streama jak predykat jest niespełniony
+    //stosuje się ją na posortowanych listach, gdyż nie jest deterministyczna
+    //takeWhile JDK > 9
+    @Test
+    void takeWhileOperations() {
+        employees.stream()
+                .sorted(Comparator.comparing(Employee::getAge).reversed())
+                .takeWhile(employee -> employee.getAge() > 30)
+                .forEach(System.out::println);
+
+    }
 }

@@ -191,6 +191,28 @@ class StreamApiExerciseTest {
                 .sorted(Comparator.comparing(Employee::getAge).reversed())
                 .takeWhile(employee -> employee.getAge() > 30)
                 .forEach(System.out::println);
-
     }
+
+    @Test
+    void dropWhileOperations() {
+        employees.stream()
+                .sorted(Comparator.comparing(Employee::getAge))
+                .dropWhile(employee -> employee.getAge() < 30)
+                .forEach(System.out::println);
+    }
+
+    //wykonując przetwarzanie wielowątkowo parallel() możemy chcieć zachować kolejność przetwarzania
+    //służy do tego forEachOrdered
+    @Test
+    void forEachOrdered() {
+        String sentence = "Jak nauczyc się programowania?";
+        sentence.chars().forEach(c -> System.out.print((char) c));
+
+        //wielowątkowo
+        sentence.chars().parallel().forEach(c -> System.out.print((char) c));
+
+        //wielowątkowo z zachowaniem kolejności
+        sentence.chars().parallel().forEachOrdered(c -> System.out.print((char) c));
+    }
+
 }
